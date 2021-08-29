@@ -1,2 +1,5 @@
 <h1>Accounts Page</h1>
 <div><img class = "images" src = "assets\img\pow.png"></div>
+<ng-template [ngIf]="valid">
+    <button (click)="logoutClicked()">Logout</button>
+</ng-template>

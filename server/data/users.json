@@ -1,0 +1,5 @@
+    [
+        {"username": "Buddy", "birthdate": "13/04/2013", "age": 8, "email": "dog@doghouse.com", "password": "bone"},
+        {"username": "Knives", "birthdate": "25/08/2011", "age": 10, "email": "cat@catshack.com", "password": "fish"},
+        {"username": "Polly", "birthdate": "17/03/2017", "age": 4, "email": "bird@birdcage.com", "password": "seed"}
+    ]

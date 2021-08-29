@@ -1,0 +1,11 @@
+<div class = "container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <h4>Username</h4>
+    <input type="username" [(ngModel)]="username" placeholder = {{username}}>
+    <h4>Email</h4>
+    <input type="email" [(ngModel)]="email" placeholder = {{email}}>
+    <h4>Birthdate</h4>
+    <input type="birthdate" [(ngModel)]="birthdate" placeholder = {{birthdate}}>
+    <h4>Age</h4>
+    <input type="age" [(ngModel)]="age" placeholder = {{age}}>
+    <div class="row mb-3 px-3"> <button type="submit" (click) = "profileUpdate()" class="btn btn-blue text-center">Submit</button> </div>
+</div>

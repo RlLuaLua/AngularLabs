@@ -1,5 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+};
+
+
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
+const BACKEND_URL = 'http://localhost:3000';
 
 @Component({
   selector: 'app-login',
@@ -7,26 +16,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  username = "";
+  password = "";
   
-  email:string = "";
-  password:string = "";
+  constructor(private router: Router, private http: HttpClient) {  }
   
-
-  users = [{'email':'dog@doghouse.com', 'upwd':'bone'}, {'email':'cat@catshack.com', 'upwd':'fish'}, {'email':'bird@birdcage.com', 'upwd':'seed'}];
-
-  constructor(private router: Router) {  }
-  
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   loginClicked() {
-    for (let i = 0; i < this.users.length; i++){
-      if (this.email == this.users[i].email && this.password == this.users[i].upwd) {
-        this.router.navigateByUrl('/account');
-      } else {
-        alert("fail: "+this.email+" "+this.password);
-      }
-    }
+    var userlogin = {username: this.username, password: this.password};
+    console.log(userlogin);
+    this.http.post(BACKEND_URL + '/api/auth', userlogin, httpOptions)
+      .subscribe((data: any) => {
+        alert(JSON.stringify(userlogin));
+        if (data.valid) {
+          sessionStorage.setItem('username', data.username);
+          sessionStorage.setItem('birthdate', data.birthdate);
+          sessionStorage.setItem('age', data.age.toString());
+          sessionStorage.setItem('email', data.email);
+          sessionStorage.setItem('valid', data.valid);
+          
+          this.http.post(BACKEND_URL + '/loginafter', data, httpOptions);
+          this.router.navigateByUrl('account');
+        } else {
+          alert('Sorry, username or password is not valid');
+        }
+      });
   }
-  
 }
